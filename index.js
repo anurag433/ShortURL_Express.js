@@ -10,12 +10,7 @@ const app = express()
 const PORT = 8000 ;
 
 // Middleware
-app.use(
-  cors({
-    origin: "https://shrt-frontend.vercel.app",
-  })
-); 
-
+app.use(cors()); 
 app.use(express.json())
 
 connectToMongoDB(process.env.MongoDB_URL)
@@ -45,7 +40,8 @@ app.get("/:shortID", async(req, res) => {
 
 module.exports = app;
 
-app.listen(PORT, ((err, data) => {
-    console.log("Server Started !");
-    
-}))
+if (process.env.NODE_ENV !== "production") {
+    app.listen(PORT, () => {
+        console.log("Server Started!");
+    });
+}
