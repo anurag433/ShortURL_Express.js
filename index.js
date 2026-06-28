@@ -4,11 +4,18 @@ const URL = require("./models/urls")
 const {} = require("./connection");
 const connectToMongoDB = require("./connection");
 require("dotenv").config();
+const cors = require("cors");
 
 const app = express()
 const PORT = 8000 ;
 
 // Middleware
+app.use(
+  cors({
+    origin: "https://shrt-frontend.vercel.app",
+  })
+); 
+
 app.use(express.json())
 
 connectToMongoDB(process.env.MongoDB_URL)
