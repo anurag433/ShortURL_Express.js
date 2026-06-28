@@ -3,6 +3,7 @@ const urlRoute = require("./routes/url")
 const URL = require("./models/urls")
 const {} = require("./connection");
 const connectToMongoDB = require("./connection");
+require("dotenv").config();
 
 const app = express()
 const PORT = 8000 ;
@@ -10,7 +11,7 @@ const PORT = 8000 ;
 // Middleware
 app.use(express.json())
 
-connectToMongoDB("mongodb+srv://anurag_db:Phase4140@cluster0.ckb1ol4.mongodb.net/url-shortener?appName=Cluster0")
+connectToMongoDB(process.env.MongoDB_URL)
 .then(() => {
     console.log("MongoDB connected !");
 })
